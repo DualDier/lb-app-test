@@ -12,7 +12,7 @@ jobs:
 
       - name: Build custom Liquibase Docker Image
         run: |
-          docker build -f Dockerfile.liquibase -t my-liquibase .
+          docker build -f ${{ github.workspace }}/liquibase/Dockerfile.liquibase -t my-liquibase .
         
       - name: Run Liquibase update using custom image
         run: |
