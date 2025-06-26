@@ -51,7 +51,7 @@ RUN mkdir /liquibase/bin && \
     lpm --version
 	
 # Copy P12 file
-COPY rds-truststore.p12 /liquibase/rds-truststore.p12
+COPY /liquibase/rds-truststore.p12 /liquibase/rds-truststore.p12
 
 # Set environment for trust store
 ENV JAVA_TOOL_OPTIONS="-Djavax.net.ssl.trustStore=/liquibase/rds-truststore.p12 -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStoreType=PKCS12"
@@ -63,9 +63,9 @@ ENV LIQUIBASE_HOME=/liquibase
 # Marker which indicates this is a Liquibase docker container
 ENV DOCKER_LIQUIBASE=true
 
-COPY docker-entrypoint.sh ./
-COPY liquibase.docker.properties ./
-COPY changelog/ changelog
+COPY /liquibase/docker-entrypoint.sh ./
+COPY /liquibase/liquibase.docker.properties ./
+COPY /liquibase/changelog/ changelog
 
 USER liquibase:liquibase
 
