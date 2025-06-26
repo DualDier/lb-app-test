@@ -1,0 +1,22 @@
+name: CI Pipeline
+
+on: [push]
+
+jobs:
+  migrate-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Liquibase Migration
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}/liquibase:/liquibase/changelog \
+            liquibase/liquibase \
+            --url=jdbc:oracle:thin:@${{ secrets.DB_HOST }}:1521/${{ secrets.DB_SERVICE }} \
+            --username=${{ secrets.DB_USER }} \
+            --password=${{ secrets.DB_PASSWORD }} \
+            --changeLogFile=changelog/changelog.xml \
+            update
