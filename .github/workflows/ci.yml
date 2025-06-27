@@ -10,17 +10,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build custom Liquibase Docker Image
+      - name: Build custom Liquibase Docker image
+        run: |
+          docker build -f ${{ github.workspace }}/liquibase/Dockerfile.liquibase -t my-liquibase .
+
+      - name: Run Liquibase update using liquibase.docker.properties
         run: |
           docker run --rm \
-            -v ${{ github.workspace }}/liquibase:/liquibase/changelog \
+            -v ${{ github.workspace }}/liquibase:/liquibase \
             -e DB_USER=${{ secrets.DB_USER }} \
             -e DB_PASS=${{ secrets.DB_PASS }} \
             my-liquibase \
-            bash -c "liquibase \
-              --url='jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=your-host)(PORT=2484))(CONNECT_DATA=(SID=ORACLE)))' \
-              --username=$DB_USER \
-              --password=$DB_PASS \
-              --changeLogFile=changelog/changelog.xml \
-              history"
-
+            update
