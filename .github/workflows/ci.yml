@@ -19,7 +19,7 @@ jobs:
           docker run --rm \
             -v ${{ github.workspace }}/liquibase:/liquibase/changelog \
             my-liquibase \
-            --url=jdbc:oracle:thin:@${{ secrets.DB_HOST }}:2484/${{ secrets.DB_SERVICE }} \
+            --url=jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=database-1.cajekgz96o6t.us-east-1.rds.amazonaws.com)(PORT=2484))(CONNECT_DATA=(SID=ORACLE))) \
             --username=${{ secrets.DB_USER }} \
             --password=${{ secrets.DB_PASSWORD }} \
             --changeLogFile=changelog/changelog.xml \
