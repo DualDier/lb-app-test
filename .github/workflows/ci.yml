@@ -12,15 +12,15 @@ jobs:
 
       - name: Build custom Liquibase Docker Image
         run: |
-          docker build -f ${{ github.workspace }}/liquibase/Dockerfile.liquibase -t my-liquibase .
-        
-      - name: Run Liquibase update using custom image
-        run: |
           docker run --rm \
             -v ${{ github.workspace }}/liquibase:/liquibase/changelog \
+            -e DB_USER=${{ secrets.DB_USER }} \
+            -e DB_PASS=${{ secrets.DB_PASS }} \
             my-liquibase \
-            --url=jdbc:oracle:thin:@\(DESCRIPTION=\(ADDRESS=\(PROTOCOL=tcps\)\(HOST=database-1.cajekgz96o6t.us-east-1.rds.amazonaws.com\)\(PORT=2484\)\)\(CONNECT_DATA=\(SID=ORACLE\)\)\) \
-            --username=${{ secrets.DB_USER }} \
-            --password=${{ secrets.DB_PASS }} \
-            --changeLogFile=changelog/changelog.xml \
-            history
+            bash -c "liquibase \
+              --url='jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=your-host)(PORT=2484))(CONNECT_DATA=(SID=ORACLE)))' \
+              --username=$DB_USER \
+              --password=$DB_PASS \
+              --changeLogFile=changelog/changelog.xml \
+              history"
+
