@@ -25,4 +25,4 @@ jobs:
             --env DB_USERNAME \
             --env DB_PASSWORD \
             --env DB_URL \
-            my-liquibase --defaults-file=/liquibase/liquibase.docker.properties history
+            my-liquibase --defaults-file=/liquibase/liquibase.docker.properties --includeSystemEnv=true history
