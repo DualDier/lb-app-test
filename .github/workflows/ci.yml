@@ -21,6 +21,6 @@ jobs:
         run: |
           docker run --rm \
             -v ${{ github.workspace }}/liquibase/changelog:/liquibase/changelog \
-            --env DB_USERNAME \
-            --env DB_PASSWORD \
+            --env DB_USERNAME=admin \
+            --env DB_PASSWORD=MZ6L4Zt6394URP3eS \
             my-liquibase --defaults-file=/liquibase/liquibase.docker.properties history
