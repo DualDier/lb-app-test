@@ -17,7 +17,7 @@ jobs:
       - name: Run Liquibase history using liquibase.docker.properties
         run: |
           docker run --rm \
-            -e DB_USER=${{ secrets.DB_USER }} \
-            -e DB_PASS=${{ secrets.DB_PASS }} \
+            -e username=${{ secrets.DB_USER }} \
+            -e password=${{ secrets.DB_PASS }} \
             my-liquibase \
             history
