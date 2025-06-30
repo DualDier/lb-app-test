@@ -5,6 +5,9 @@ on: [push]
 jobs:
   migrate-and-test:
     runs-on: ubuntu-latest
+    env:
+      DB_USERNAME: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASS }} 
 
     steps:
       - name: Checkout code
