@@ -67,10 +67,11 @@ COPY /liquibase/docker-entrypoint.sh ./
 COPY /liquibase/liquibase.docker.properties ./
 COPY /liquibase/changelog/ changelog
 
+USER liquibase:liquibase
 RUN chown liquibase:liquibase /liquibase/docker-entrypoint.sh
 RUN chmod +x /liquibase/docker-entrypoint.sh
 
-USER liquibase:liquibase
+
 
 ENTRYPOINT ["/liquibase/docker-entrypoint.sh"]
 CMD ["--help"]
