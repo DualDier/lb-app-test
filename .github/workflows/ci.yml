@@ -14,11 +14,10 @@ jobs:
         run: |
           docker build -f ${{ github.workspace }}/liquibase/Dockerfile.liquibase -t my-liquibase .
 
-      - name: Run Liquibase update using liquibase.docker.properties
+      - name: Run Liquibase history using liquibase.docker.properties
         run: |
           docker run --rm \
-            -v ${{ github.workspace }}/liquibase:/liquibase \
             -e DB_USER=${{ secrets.DB_USER }} \
             -e DB_PASS=${{ secrets.DB_PASS }} \
             my-liquibase \
-            update
+            history
