@@ -18,6 +18,4 @@ jobs:
         run: |
           docker run --rm \
             -v ${{ github.workspace }}/liquibase/changelog:/liquibase/changelog \
-            --defaults-file=/liquibase/liquibase.docker.properties \
-            my-liquibase \
-            history
+            my-liquibase/ --defaults-file=/liquibase.docker.properties history
