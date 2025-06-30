@@ -7,7 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DB_USERNAME: ${{ secrets.DB_USER }}
-      DB_PASSWORD: ${{ secrets.DB_PASS }} 
+      DB_PASSWORD: ${{ secrets.DB_PASS }}
+      DB_URL: ${{ secrets.DB_URL }} 
 
     steps:
       - name: Checkout code
@@ -21,6 +22,7 @@ jobs:
         run: |
           docker run --rm \
             -v ${{ github.workspace }}/liquibase/changelog:/liquibase/changelog \
-            --env DB_USERNAME=admin \
-            --env DB_PASSWORD=MZ6L4Zt6394URP3eS \
-            my-liquibase --defaults-file=/liquibase/liquibase.docker.properties history
+            --env DB_USERNAME \
+            --env DB_PASSWORD \
+            --env DB_URL \
+            my-liquibase --url=${DB_URL} --username=${DB_USERNAME} --password=${DB_PASSWORD} history
