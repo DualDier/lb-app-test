@@ -25,4 +25,4 @@ jobs:
             --env DB_USERNAME \
             --env DB_PASSWORD \
             --env DB_URL \
-            my-liquibase --url=${DB_URL} --username=${DB_USERNAME} --password=${DB_PASSWORD} history
+            my-liquibase --defaults-file=/liquibase/liquibase.docker.properties history
