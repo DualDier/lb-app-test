@@ -18,8 +18,8 @@ jobs:
         run: |
           docker build -f ${{ github.workspace }}/liquibase/Dockerfile.liquibase -t my-liquibase .
 
-      - name: Run Liquibase history using liquibase.docker.properties
+      - name: Run liquibase generateChangeLog with properties file
         run: |
           docker run --rm \
-            -v ${{ github.workspace }}/liquibase/changelog:/liquibase/changelog \
+            -v ${{ github.workspace }}/liquibase/changelog/generated_changelogs:/liquibase/changelog \
             my-liquibase --url=${DB_URL} --username=${DB_USERNAME} --password=${DB_PASSWORD} --defaults-file=/liquibase/liquibase.docker.properties generateChangeLog
