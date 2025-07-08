@@ -13,7 +13,7 @@ RUN addgroup --gid 1001 liquibase && \
 # Install smaller JRE, if available and acceptable
 RUN apk add --no-cache openjdk21-jre-headless bash
 
-WORKDIR /liquibase/changelog
+WORKDIR /liquibase
 
 ARG LIQUIBASE_VERSION=4.32.0
 ARG LB_SHA256=10910d42ae9990c95a4ac8f0a3665a24bd40d08fb264055d78b923a512774d54
