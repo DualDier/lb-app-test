@@ -65,7 +65,6 @@ ENV DOCKER_LIQUIBASE=true
 
 COPY /liquibase/docker-entrypoint.sh ./
 COPY /liquibase/liquibase.docker.properties ./
-COPY /liquibase/changelog/ changelog
 
 
 RUN chown liquibase:liquibase /liquibase/docker-entrypoint.sh
