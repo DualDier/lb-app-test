@@ -22,4 +22,4 @@ jobs:
         run: |
           docker run --rm \
             -v ${{ github.workspace }}/liquibase/changelog:/liquibase/changelog \
-            my-liquibase --defaults-file=/liquibase/liquibase.docker.properties generateChangeLog
+            my-liquibase --url=${DB_URL} --username=${DB_USERNAME} --password=${DB_PASSWORD} --defaults-file=/liquibase/liquibase.docker.properties generateChangeLog
