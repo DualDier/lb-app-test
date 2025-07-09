@@ -27,3 +27,10 @@ jobs:
       
       - name: List generated files for troubleshooting
         run: ls -l liquibase/changelog/generated_changelogs
+      
+      - name: Upload changelog artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: liquibase-changelog
+          path: liquibase/changelog/generated_changelogs/changelog.xml
+
