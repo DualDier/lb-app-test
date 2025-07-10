@@ -23,7 +23,7 @@ jobs:
           docker run --rm \
             -v ${{ github.workspace }}/liquibase/changelog/generated_changelogs:/liquibase/changelog \
             -w /liquibase/changelog \
-            my-liquibase --url=${DB_URL} --username=${DB_USERNAME} --password=${DB_PASSWORD} --defaults-file=/liquibase/liquibase.docker.properties generateChangeLog --log-level=debug
+            my-liquibase --url=${DB_URL} --username=${DB_USERNAME} --password=${DB_PASSWORD} --defaults-file=/liquibase/liquibase.docker.properties generateChangeLog
       
       - name: List generated files for troubleshooting
         run: ls -l liquibase/changelog/generated_changelogs
