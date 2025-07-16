@@ -1,0 +1,37 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="liquibase (generated)" id="1752082295342-1">
+        <createTable tableName="DEPARTMENTS">
+            <column name="DEPARTMENT_ID" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C006814"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(100 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1752082295342-2">
+        <createTable tableName="EMPLOYEES">
+            <column name="EMPLOYEE_ID" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C006815"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(100 BYTE)"/>
+            <column name="HIRE_DATE" type="date"/>
+            <column name="DEPARTMENT_ID" type="NUMBER"/>
+            <column name="SALARY" type="NUMBER(10, 2)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1752082295342-3">
+        <createTable tableName="PET_TABLE">
+            <column name="ID" type="NUMBER(*, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C006307"/>
+            </column>
+            <column name="BREED" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1752082295342-4">
+        <addForeignKeyConstraint baseColumnNames="DEPARTMENT_ID" baseTableName="EMPLOYEES" constraintName="FK_DEPARTMENT" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="DEPARTMENT_ID" referencedTableName="DEPARTMENTS" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

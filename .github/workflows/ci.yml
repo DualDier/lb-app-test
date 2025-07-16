@@ -18,15 +18,15 @@ jobs:
         run: |
           docker build -f ${{ github.workspace }}/liquibase/Dockerfile.liquibase -t my-liquibase .
 
-      - name: Run liquibase generateChangeLog with properties file
+      - name: Run changelog-sync with changelog-baseline
         run: |
           docker run --rm \
-            -v ${{ github.workspace }}/liquibase/changelog/generated_changelogs:/liquibase/changelog \
+            -v ${{ github.workspace }}/liquibase/changelog:/liquibase/changelog \
             -w /liquibase/changelog \
-            my-liquibase --url=${DB_URL} --username=${DB_USERNAME} --password=${DB_PASSWORD} --defaults-file=/liquibase/liquibase.docker.properties generateChangeLog
+            my-liquibase --url=${DB_URL} --username=${DB_USERNAME} --password=${DB_PASSWORD} --defaults-file=/liquibase/liquibase.docker.properties changelog-sync
       
       - name: List generated files for troubleshooting
-        run: ls -l liquibase/changelog/generated_changelogs
+        run: ls -l liquibase/changelog/
       
       - name: Upload changelog artifact
         uses: actions/upload-artifact@v4
